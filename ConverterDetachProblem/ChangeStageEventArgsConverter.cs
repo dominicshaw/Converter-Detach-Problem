@@ -17,7 +17,7 @@ namespace ConverterDetachProblem
                 if (oldStage.StageID == 7 && newStage.StageID == 8)
                     return newStage;
 
-                MessageBox.Show($"You cannot change an invoice from '{oldStage.Label}' to '{newStage.Label}'.\n\nIf you would find it useful to be able to do this, please contact TTDevelopers@ttint.com.", "Disabled Stage Change", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"You cannot change an invoice from '{oldStage.Label}' to '{newStage.Label}'.\n\nIf you would find it useful to be able to do this, please contact IT.", "Disabled Stage Change", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             return null;
