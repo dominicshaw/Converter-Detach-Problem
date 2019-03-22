@@ -1,5 +1,4 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using DevExpress.Mvvm;
 
 namespace ConverterDetachProblem
