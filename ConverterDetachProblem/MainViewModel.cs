@@ -3,17 +3,16 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ConverterDetachProblem.Annotations;
-using DevExpress.Mvvm;
 
 namespace ConverterDetachProblem
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public ICommand OpenItemCommand => new DelegateCommand<ItemViewModel>(Open);
+        public ICommand OpenItemCommand => new DelegateCommand<ItemViewModel>(Open, () => true);
 
         public ObservableCollection<ItemViewModel> Items { get; } = new ObservableCollection<ItemViewModel>();
 
-        public ICommand SetPaidCommand => new DelegateCommand(SetPaid);
+        public ICommand SetPaidCommand => new DelegateCommand<object>(o => SetPaid(), () => true);
 
         public MainViewModel()
         {

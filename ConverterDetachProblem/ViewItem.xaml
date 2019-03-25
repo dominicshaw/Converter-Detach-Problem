@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ConverterDetachProblem"
-        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d" SizeToContent="Height"
         Title="ViewItem" Width="300" d:DataContext="{d:DesignInstance local:ItemViewModel}">
 
@@ -27,13 +27,11 @@
         <TextBox Margin="5,2" Grid.Row="0" Grid.Column="1" Text="{Binding Id}"></TextBox>
         <TextBox Margin="5,2" Grid.Row="1" Grid.Column="1" Text="{Binding Name}"></TextBox>
         <ComboBox Margin="5,2" Grid.Row="2" Grid.Column="1" SelectedItem="{Binding Stage, Mode=OneWay}" ItemsSource="{Binding Source={StaticResource ListsViewModel}, Path=Stages}">
-            <dxmvvm:Interaction.Behaviors>
-                <dxmvvm:EventToCommand EventName="SelectionChanged" Command="{Binding ChangeStageCommand}">
-                    <dxmvvm:EventToCommand.EventArgsConverter>
-                        <local:ChangeStageEventArgsConverter />
-                    </dxmvvm:EventToCommand.EventArgsConverter>
-                </dxmvvm:EventToCommand>
-            </dxmvvm:Interaction.Behaviors>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding ChangeStageCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </ComboBox>
 
         <Button Margin="5,2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Ok" Command="{Binding RelativeSource={RelativeSource AncestorType=local:ViewItem}, Path=CloseCommand}" />

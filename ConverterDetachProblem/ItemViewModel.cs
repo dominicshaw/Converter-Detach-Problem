@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ConverterDetachProblem.Annotations;
-using DevExpress.Mvvm;
 
 namespace ConverterDetachProblem
 {
@@ -11,9 +13,22 @@ namespace ConverterDetachProblem
         private int _id;
         private string _name;
         private Stage _stage;
-        
-        public ICommand ChangeStageCommand => new DelegateCommand<Stage>(ChangeStage);
-        private void ChangeStage(Stage stage) => Stage = stage == null ? Stage : stage;
+
+        public ICommand ChangeStageCommand => new DelegateCommand<SelectionChangedEventArgs>(ChangeStage, () => true);
+
+        private void ChangeStage(SelectionChangedEventArgs args)
+        {
+            var oldStage = args.RemovedItems.OfType<Stage>().FirstOrDefault();
+            var newStage = args.AddedItems.OfType<Stage>().FirstOrDefault();
+
+            if (oldStage != null && newStage != null)
+            {
+                if (oldStage.StageID == 7 && newStage.StageID == 8)
+                    Stage = newStage;
+
+                MessageBox.Show("The converter fired!", "Converter!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
 
         public int Id
         {

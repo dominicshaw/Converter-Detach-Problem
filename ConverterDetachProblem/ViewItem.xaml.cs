@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using DevExpress.Mvvm;
 
 namespace ConverterDetachProblem
 {
@@ -11,6 +10,6 @@ namespace ConverterDetachProblem
             DataContext = item;
         }
 
-        public ICommand CloseCommand => new DelegateCommand(Close);
+        public ICommand CloseCommand => new DelegateCommand<object>(o => Close(), () => true);
     }
 }
