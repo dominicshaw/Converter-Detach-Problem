@@ -5,13 +5,13 @@ namespace ConverterDetachProblem
 {
     public class DelegateCommand<T> : ICommand
     {
-        private Action<T> _action;
-        private Func<bool> _predicate;
+        private readonly Action<T> _action;
+        private readonly Func<bool> _predicate;
 
-        public DelegateCommand(Action<T> _action, Func<bool> _predicate)
+        public DelegateCommand(Action<T> action, Func<bool> predicate)
         {
-            this._action = _action;
-            this._predicate = _predicate;
+            _action = action;
+            _predicate = predicate;
         }
 
         private void Execute(T parameter)
